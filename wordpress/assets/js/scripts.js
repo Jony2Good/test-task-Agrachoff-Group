@@ -5,15 +5,15 @@ $(document).ready(function () {
             article: $("#article").val(),
         };
         $.ajax({
-            url: "./main.php",
+            url: "wp-admin/admin-ajax.php?action=data",
             type: "get",
             dataType: 'json',
             data: data,
             success: function (data) {
                 const element = document.querySelector('.table');
                 const text = document.querySelector('.js-text');
-                if (text) text.remove();
-                if (!element) {
+                if(text) text.remove();
+                if(!element) {
                     createTable(data);
                 } else {
                     element.remove();
@@ -23,7 +23,7 @@ $(document).ready(function () {
             error: function (error) {
                 if (error) {
                     const element = document.querySelector('.table');
-                    if (element) {
+                    if(element) {
                         element.remove();
                         alert("Ошибка при вводе данных");
                     }
@@ -130,36 +130,73 @@ timeline.from('h1', {
 window.addEventListener('scroll', scrollImage);
 
 scrollImage();
-
 function scrollImage() {
-    const img = document.querySelector('.bg-image');
-    const imageTop = img.getBoundingClientRect().top;
+   const img = document.querySelector('.bg-image');
+   const imageTop = img.getBoundingClientRect().top;  
 
-    if (imageTop < 14) {
-        img.classList.add('show');
-    } else {
-        img.classList.remove('show');
-    }
+   if(imageTop < 88) {
+       img.classList.add('show');
+   } else {
+       img.classList.remove('show');
+   }
 }
 
-
-$("#send").on("submit", function (event) {
-    event.preventDefault();
-    const data = {
-        email: $("#email").val(),
-    };
-    $.ajax({
-        url: "./mail.php",
-        type: "POST",
-        data: data,
-        success: function (data) {
-            alert('сообщение отправлено');
-            console.log(data)
-        },
-        error: function (error) {
-            console.error("Ошибка при отправке данных: ", error);
-        },
+ function init() {
+    let e = new ymaps.Map("map", {
+            center: [55.68347756905906,37.731209500000006],
+            zoom: 17,
+            controls: []
+        }, {
+            yandexMapDisablePoiInteractivity: !0
+        });
+        HintLayout = ymaps.templateLayoutFactory.createClass( "<div class='my-hint'>" +
+            "<b>{{ properties.object }}</b><br />" +
+            "{{ properties.address }}" +
+            "</div>", {              
+                getShape: function () {
+                    var el = this.getElement(),
+                        result = null;
+                    if (el) {
+                        var firstChild = el.firstChild;
+                        result = new ymaps.shape.Rectangle(
+                            new ymaps.geometry.pixel.Rectangle([
+                                [0, 0],
+                                [firstChild.offsetWidth, firstChild.offsetHeight]
+                            ])
+                        );
+                    }
+                    return result;
+                }
+            }
+        );
+    let t = new ymaps.Placemark([55.68347756905906,37.731209500000006], {
+        address: "Москва, ул. Полбина, д.3, с.1, офис 212",
+        object: "Компания Agrachev Group - лидер рынка IT в РФ"
+    }, {
+        hintLayout: HintLayout
     });
-});
+    e.geoObjects.add(t);
+};
+    ymaps.ready(init);
 
+
+$(function ($) {
+    $("#send-form").submit(function (event) {
+        event.preventDefault();
+        const data = {
+            email: $("#email").val(),
+        };        
+        $.ajax({
+            url: mainAjax.ajaxUrl,
+            type: 'POST',
+            data: data,            
+            success: function (res) {               
+                alert('сообщение отправлено');
+            },
+            error: function (error) {
+                console.error("Ошибка при отправке данных: ", error);
+            },
+        })
+    });
+})
 

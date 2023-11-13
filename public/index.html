@@ -74,7 +74,38 @@
                 </ul>
                 <!-- Кнопка на обратный звонок -->
                 <div class="d-flex">
-                    <button class="btn btn-primary btn-layout" type="button">Обратный звонок</button>
+                    <button class="btn btn-primary btn-layout" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        Обратный звонок
+                    </button>
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Форма для связи</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="send">
+                                        <div class="form-group row mb-4">
+                                            <label class="col-sm-2 col-form-label" for="email">E-mail:</label>
+                                            <div class="col-sm-10">
+                                                <input type="email" name="email" class="form-control" id="email"
+                                                       placeholder="Email">
+                                            </div>
+                                        </div>
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-primary send-js">Отправить</button>
+                                        </div>
+                                    </form>
+                                    <div class="text-center pt-2 pb-2">
+                                        <span class="msg"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -173,18 +204,18 @@
                     </div>
                     <!-- Кнопка отправить данные формы -->
                     <div class="d-flex justify-content-center">
-                      <button class="btn btn-primary btn-layout" type="submit">Отправить</button>
+                        <button class="btn btn-primary btn-layout" type="submit">Отправить</button>
                     </div>
                 </form>
             </div>
         </div>
         <!-- Блок со скроллом -->
-            <div class="main__block-scroll">
-                <a href="#" class="scroll-block text-center">
-                    <div class="scroll-layout"><img src="./assets/img/scroll.svg" alt="scroll"></div>
-                    <p class="link-layout">Scroll</p>
-                </a>
-            </div>
+        <div class="main__block-scroll">
+            <a href="#" class="scroll-block text-center">
+                <div class="scroll-layout"><img src="./assets/img/scroll.svg" alt="scroll"></div>
+                <p class="link-layout">Scroll</p>
+            </a>
+        </div>
         <div class="bg-image"></div>
     </div>
 </main>
@@ -194,7 +225,8 @@
         <form class="row g-3" id="myForm">
             <div class="col-12 mb-4">
                 <label for="article" class="visually-hidden">Password</label>
-                <input type="text" name="article" class="form-control" id="article" placeholder="Введите наименование артикуля">
+                <input type="text" name="article" class="form-control" id="article"
+                       placeholder="Введите наименование артикуля">
             </div>
             <div class="col d-flex justify-content-center align-items-center">
                 <button type="submit" class="btn btn-primary js-btn mb-3">Отправить</button>

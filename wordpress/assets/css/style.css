@@ -277,8 +277,8 @@ main {
 
 .bg-image {
     content: '';
-    min-width: 575px;
-    min-height: 575px;
+    min-width: 666px;
+    min-height: 666px;
     background: url(../img/header.jpg) no-repeat left top;
     position: absolute;
     left: 50%;
@@ -291,8 +291,7 @@ main {
 
 }
 .bg-image.show {
-    opacity: 1;
-    transform: translate(0) !important;
+    transform: translate(400%, 0) !important;
     transition: transform 0.5s ease;
 }
 
@@ -300,4 +299,27 @@ main {
 
 .section-layout {
     padding: 30px 30px;
+}
+
+.my-hint {
+    display: inline-block;
+    padding: 5px;
+    min-height: 40px;
+    position: relative;
+    left: -10px;
+    min-width: 260px;
+    font-size: 10px;
+    line-height: 16px;
+    color: #333333;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #faefb6;
+    border: 1px solid #CDB7B5;
+    border-radius: 20px;
+    font-family: Arial;
+}
+
+.container-map {
+    max-width: 800px;
+    max-height: 800px;
 }
